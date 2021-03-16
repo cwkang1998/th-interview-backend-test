@@ -47,4 +47,25 @@ def top_post():
 
 @app.route('/search', methods=['GET'])
 def search():
-    return 'search'
+    url_params = []
+    postId = request.args.get('postId', '')
+    comment_id = request.args.get('id', '')
+    name = request.args.get('name', '')
+    email = request.args.get('email', '')
+    body = request.args.get('body', '')
+    if(postId):
+        url_params.append(f'postId={postId}')
+    if(comment_id):
+        url_params.append(f'id={comment_id}')
+    if(name):
+        url_params.append(f'name={name}')
+    if(email):
+        url_params.append(f'email={email}')
+    if(body):
+        url_params.append(f'body={body}')
+    r = requests.get(
+        f'https://jsonplaceholder.typicode.com/comments?{"&".join(url_params)}'
+    )
+    if(r.status_code == 200):
+        return jsonify(r.json()), 200
+    return {'error': 'Failed to search comments'}, 400
