@@ -9,4 +9,4 @@ The application in written and tested running on python version 3.8.6. Compatibi
 
 ## How to run
 
-Doing `flask run` or just running it via `python app.py` should run the program without issues.
+Doing `flask run` or running it via `python -m flask run` should run the program without issues given that the dependencies are installed correctly.
